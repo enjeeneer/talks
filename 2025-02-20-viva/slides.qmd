@@ -1,0 +1,299 @@
+---
+title: "4 Years in 4 (ish) Minutes"
+author: "Scott Jeen"
+subtitle: Reflections on a PhD
+institute: University of Cambridge
+format: rick-revealjs
+---
+
+## Agenda
+1. Zero-Shot Reinforcement Learning: Why?
+2. With No Prior Data
+3. From Low Quality Data
+4. Under Changed Dynamics
+5. Outlook
+5. Reflections
+
+## Reinforcement Learning: Why?
+
+:::{.fragment}
+- Society faces many problems, many of which can be cast as sequential decision-making problems
+:::
+:::{.fragment}
+    - Micro: drug discovery
+:::
+:::{.fragment}
+    - Micro: energy generation control (fusion, fission, wind)
+:::
+:::{.fragment}
+    - Micro: teacher interacting sequentially with a student
+:::
+:::{.fragment}
+    - Macro: climate policy
+:::
+:::{.fragment}
+    - Macro: legislative innovation
+:::
+:::{.fragment}
+    - Macro: science
+:::
+
+:::{.fragment}
+- Reinforcement learning is the (as yet) most effective computational approach to solving sequential decision-making problems
+:::
+
+---
+
+## RL + Simulators + Compute = Superhuman
+
+<div style="text-align: center;">
+![](figures/silver-rl.png){width=100%}
+</div>
+
+::: aside
+David Silver, RL Conference 2024
+:::
+
+---
+
+## RL + <span style="color: red;">~~Simulators~~</span> + Compute = Superhuman
+
+<div style="text-align: center;">
+![](figures/silver-rl.png){width=100%}
+</div>
+
+::: aside
+David Silver, RL Conference 2024
+:::
+
+---
+
+## RL + _Learned Simulators_ + Compute = Meh?
+
+:::{.fragment}
+- In the absence of a ground-truth simulator, we can _learn_ one from data
+:::
+
+:::{.fragment}
+- In practice, this means collecting data from our problem's environment, and building a model that simulates its dynamics
+:::
+
+:::{.fragment}
+- But these models will only ever be approximations of the real world
+:::
+
+:::{.fragment}
+- So, a gap between these learned simulators and the real world is **inevitable**. The system cannot see the real-world in advance.
+:::
+
+---
+
+## Zero-Shot Reinforcement Learning {.scrollable}
+- Adapting quickly to the real-world is the primary concern of _zero-shot reinforcement learning_ methods
+
+:::{.fragment}
+- Impressive progress has been made if the gap between the learned simulator and the real-world is small
+:::
+
+:::{.fragment}
+- I contend that to solve real-world problems these methods need to deal with a larger gap and satisfy
+<div style="text-align: center;">
+![](figures/constraints.png){width=85%}
+</div>
+:::
+
+---
+
+<div style="padding-top: 200px;">
+<div style="text-align: center;">
+![](figures/thesis.png){width=85%}
+</div>
+</div>
+
+---
+
+## Paper 1: Data Quality Constraint
+<div style="padding-top: 50px;">
+<div style="text-align: center;">
+![](figures/vcfb-intuition-3.png){width=100%}
+</div>
+</div>
+
+::: aside
+Scott Jeen, Tom Bewley, and Jonathan M. Cullen. _Zero-shot Reinforcement Learning from Low Quality Data_. In Advances in Neural Information Processing Systems 38, 2024
+:::
+
+---
+
+## Paper 1: Data Quality Constraint
+<div style="padding-top: 50px;">
+<div style="text-align: center;">
+![](figures/performance-profiles-subplot.png){width=80%}
+</div>
+</div>
+
+::: aside
+Scott Jeen, Tom Bewley, and Jonathan M. Cullen. _Zero-shot Reinforcement Learning from Low Quality Data_. In Advances in Neural Information Processing Systems 38, 2024
+:::
+
+---
+
+## Paper 2a: Dynamics Constraint
+<div style="padding-top: 50px;">
+<div style="text-align: center;">
+![](figures/confb-architecture-final.png){width=80%}
+</div>
+</div>
+
+::: aside
+Scott Jeen and Jonathan M. Cullen. _Foundation Policies with Memory_. Under review at ICLR 2025
+:::
+
+---
+
+## Paper 2a: Dynamics Constraint
+<div style="padding-top: 50px;">
+<div style="text-align: center;">
+![](figures/aggregate-train-test.png){width=70%}
+</div>
+</div>
+
+::: aside
+Scott Jeen and Jonathan M. Cullen. _Foundation Policies with Memory_. Under review at ICLR 2025
+:::
+
+---
+
+## Paper 2b: Dynamics Constraint
+<div style="padding-top: 20px;">
+<div style="text-align: center;">
+![](figures/darc-intuition.png){width=50%}
+</div>
+</div>
+
+::: aside
+Scott Jeen and Jonathan M. Cullen. _Dynamics Generalisation with Behaviour Foundation Models_. RLC 2024
+:::
+
+---
+
+## Paper 2b: Dynamics Constraint
+<div style="padding-top: 100px;">
+<div style="text-align: center;">
+![](figures/results.png){width=80%}
+</div>
+</div>
+
+::: aside
+Scott Jeen and Jonathan M. Cullen. _Dynamics Generalisation with Behaviour Foundation Models_. RLC 2024
+:::
+
+---
+
+## Paper 3: With No Prior Data (for building control)
+<div style="padding-top: 100px;">
+<div style="text-align: center;">
+![](figures/pearl.png){width=80%}
+</div>
+</div>
+
+::: aside
+Scott Jeen, Alessandro Abate & Jonathan M. Cullen. _Low Emission Building Control with Zero-Shot Reinforcement Learning_. AAAI 2023
+:::
+
+---
+
+## Paper 3: With No Prior Data (for building control)
+<div style="padding-top: 20px;">
+<div style="text-align: center;">
+![](figures/emissions.jpg){width=80%}
+</div>
+</div>
+
+::: aside
+Scott Jeen, Alessandro Abate & Jonathan M. Cullen. _Low Emission Building Control with Zero-Shot Reinforcement Learning_. AAAI 2023
+:::
+
+---
+
+## Reflections
+
+::: {.fragment}
+### Things I did well
+- I hit the rock every day (stonecutter's creedo)
+:::
+
+::: {.fragment}
+- I got formal feedback (peer review) as often as I could
+:::
+
+::: {.fragment}
+- I focussed on problems, not solutions (latterly)
+:::
+
+::: {.fragment}
+- I didn't follow the zeitgeist
+:::
+
+---
+
+## Reflections
+
+::: {.fragment}
+### Things I didn't do well
+- I should have spoken to (and collaborated with) more people, especially at conferences
+:::
+
+::: {.fragment}
+- I could've written up my work more frequently
+:::
+
+::: {.fragment}
+- I could've followed the zeitgeist more
+:::
+
+::: {.fragment}
+- I didn't spot the building control work was a dead-end quickly enough (I was too focussed on solutions not problems)
+:::
+
+::: {.fragment}
+- I wasted time in the first 18 months
+:::
+
+---
+
+## Things I'll take away (and you might too)
+
+::: {.fragment}
+- Your idea can always be more general
+:::
+
+::: {.fragment}
+- Your feedback loop can always be tighter (i.e you can always interact with the real-world more regularly)
+:::
+
+::: {.fragment}
+- You can always speak to more people
+:::
+
+::: {.fragment}
+- You can always write up your work (even if nobody reads it!)
+:::
+
+::: {.fragment}
+- There's a lower bound on the number of attempts it takes to solve a hard problem
+:::
+
+::: {.fragment}
+- You can always work quicker (sorry)
+:::
+
+::: {.fragment}
+- You can untie any knot if you play with it long enough (and physics will let you untie it)
+:::
+
+---
+
+# Thanks!
+
+---
