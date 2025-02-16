@@ -1,0 +1,202 @@
+---
+title: "Zero-Shot Reinforcement Learning from Low Quality Data"
+author: "Scott Jeen$^{\\alpha}$, Tom Bewley$^{\\beta}$ & Jonathan M. Cullen$^{\\alpha}$"
+subtitle: NeurIPS 2024
+institute: $^{\alpha}$ University of Cambridge $^{\beta}$ University of Bristol
+format: rick-revealjs
+---
+
+## Motivation
+
+:::{.fragment}
+- Training policies to (zero-shot) generalise to unseen tasks in an environment is hard! [1]
+:::
+
+::: aside
+[1] Robert Kirk, Amy Zhang, Edward Grefenstette, and Tim Rocktäschel. _A survey of zero-shot generalisation in deep reinforcement learning_. JAIR 2023
+:::
+
+:::{.fragment}
+- Behaviour Foundation Models (BFMs) based on forward-backward representations (FB) [2] and universal successor features (USF) [3], provide principled mechanisms for performing zero-shot task generalisation
+:::
+
+::: aside
+[2] Ahmed Touati, Jérémy Rapin, and Yann Ollivier. _Does zero-shot reinforcement learning exist?_ ICLR 2023
+
+[3] Seohong Park, Tobias Kreiman, and Sergey Levine. _Foundation Policies with Hilbert Representations_. ICML 2024
+:::
+
+:::{.fragment}
+- However, BFMs assume access to idealised (large & diverse) pre-training datasets that we can't expect for real problems
+:::
+
+:::{.fragment}
+- **Can we pre-train BFMs on realistic (small & narrow) datasets?**
+:::
+
+---
+
+## Out-of-distribution Value Overestimation in BFMs
+
+<div style="text-align: center;">
+![](figures/overestimates.png){width=85%}
+</div>
+
+---
+
+## Out-of-distribution Value Overestimation in BFMs
+
+<div style="text-align: center;">
+![](figures/overestimates.png){width=85%}
+</div>
+
+<div style="text-align: center;">
+![](figures/fb-loss.png){width=100%}
+</div>
+
+---
+
+## Out-of-distribution Value Overestimation in BFMs
+
+<div style="text-align: center;">
+![](figures/overestimates.png){width=85%}
+</div>
+
+<div style="text-align: center;">
+![](figures/fb-loss-2.png){width=100%}
+</div>
+
+::: aside
+[3] Aviral Kumar, Justin Fu, Matthew Soh, George Tucker, and Sergey Levine. _Stabilizing off-policy
+q-learning via bootstrapping error reduction._  NeurIPS 2019
+:::
+
+---
+
+## _Conservative_ BFMs
+
+---
+
+## _Conservative_ BFMs
+![](figures/vcfb-intuition-0.png){width=90%}
+
+---
+
+## _Conservative_ BFMs
+![](figures/vcfb-intuition-1.png){width=90%}
+
+---
+
+## _Conservative_ BFMs
+![](figures/vcfb-intuition-2.png){width=90%}
+
+---
+
+## _Conservative_ BFMs
+![](figures/vcfb-intuition-3.png){width=100%}
+
+![](figures/vcfb-equation.png){width=77%}
+![](figures/mcfb-equation.png){width=100%}
+
+::: aside
+[4] Aviral Kumar, Aurick Zhou, George Tucker, and Sergey Levine. _Conservative q-learning for offline reinforcement learning._ NeurIPS 2020
+:::
+
+---
+
+## ExORL Results
+
+::: {.columns}
+:::: {.column width="50%"}
+
+### Baselines
+- **Zero-shot RL:** FB, SF-LAP [5]
+- **Goal-conditioned RL:** GC-IQL [6]
+- **Offline RL:** CQL [7]
+
+::::
+
+:::: {.column width="50%"}
+### Datasets
+
+![](figures/dataset-heatmap.png){width=100%}
+::::
+:::
+
+::: aside
+[5] Ahmed Touati, Jérémy Rapin, and Yann Ollivier. _Does zero-shot reinforcement learning exist?_ ICLR 2023
+
+[6] Seohong Park, Dibya Ghosh, Benjamin Eysenbach, and Sergey Levine. _Hiql: Offline goalconditioned rl with latent states as actions._ NeurIPS 2023.
+
+[7] Aviral Kumar, Justin Fu, Matthew Soh, George Tucker, and Sergey Levine. _Conservative q-learning for
+offline reinforcement learning._ NeurIPS 2020
+:::
+
+---
+
+## ExORL Results
+
+<div style="padding-top: 50px;">
+![](figures/performance-profiles-subplot.png){width=100%}
+</div>
+
+---
+
+## D4RL Results
+
+<div style="padding-top: 50px;">
+<div style="text-align: center;">
+![](figures/d4rl-performance.png){width=52%}
+</div>
+</div>
+
+---
+
+## Performance on Idealised Datasets is Unaffected
+
+::: {.columns}
+::: {.column width="50%"}
+![](figures/dataset-size.png)
+:::
+::: {.column width="50%"}
+![](figures/full-datasets.png)
+:::
+:::
+
+---
+
+## Conclusions
+
+::: {.columns}
+:::: {.column width="50%"}
+
+::: {.fragment}
+- Like standard offline RL methods, BFMs suffer from the _distribution shift_
+:::
+
+::: {.fragment}
+- As a resolution, we introduce _Conservative_ BFMs
+:::
+
+::: {.fragment}
+- _Conservative_ BFMs considerably outperform standard BFMs on low-quality datasets
+:::
+
+::: {.fragment}
+- _Conservative_ BFMs do not compromise performance on idealised datasets
+:::
+::::
+
+:::: {.column width="50%"}
+
+::: {.fragment}
+**Project page:**
+
+![](figures/qr.png){width=50%}
+
+**Twitter/X:** [@enjeeneer](https://x.com/enjeeneer)
+
+**Website:** [https://enjeeneer.io](https://enjeeneer.io)
+:::
+::::
+:::
