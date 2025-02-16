@@ -1,50 +1,86 @@
 ---
-title: "4 Years in 4 (ish) Minutes"
+title: "On Zero-Shot Reinforcement Learning"
 author: "Scott Jeen"
-subtitle: Reflections on a PhD
+subtitle: PhD Viva
 institute: University of Cambridge
 format: rick-revealjs
 ---
 
-## Agenda
-1. Zero-Shot Reinforcement Learning: Why?
-2. With No Prior Data
-3. From Low Quality Data
-4. Under Changed Dynamics
+## Outline
+
+:::{.fragment}
+1. The Case for Zero-Shot RL
+:::
+
+:::{.fragment}
+2. **Chapter 3:** From Low Quality Data
+:::
+
+:::{.fragment}
+3. **Chapter 4:** Under Changed Dynamics
+:::
+
+## Outline
+
+1. The Case for Zero-Shot RL
+
+2. **Chapter 3:** From Low Quality Data
+
+3. <span style="color: red;">~~**Chapter 4:** Under Changed Dynamics~~</span>
+
+:::{.fragment}
+3. **Chapter 4:** Under <span style="color: green;">_Partial Observability_</span>
+:::
+
+:::{.fragment}
+4. **Chapter 5:** With No Prior Data
+:::
+
+:::{.fragment}
 5. Outlook
-5. Reflections
+:::
 
-## Reinforcement Learning: Why?
+## The Case for RL
 
 :::{.fragment}
-- Society faces many problems, many of which can be cast as sequential decision-making problems
+- Society faces problems, many of which can be cast as sequential decision-making problems:
 :::
 :::{.fragment}
-    - Micro: drug discovery
+    - Engineering: energy generation control (fusion, fission, wind)
 :::
 :::{.fragment}
-    - Micro: energy generation control (fusion, fission, wind)
+    - Education: teacher-student interaction
 :::
 :::{.fragment}
-    - Micro: teacher interacting sequentially with a student
+    - Mathematics: theorem-proving
 :::
 :::{.fragment}
-    - Macro: climate policy
+    - Policy: climate negotiations
 :::
 :::{.fragment}
-    - Macro: legislative innovation
-:::
-:::{.fragment}
-    - Macro: science
+    - Science: forming hypotheses -> making predictions -> testing them
 :::
 
 :::{.fragment}
-- Reinforcement learning is the (as yet) most effective computational approach to solving sequential decision-making problems
+- In such cases:
+:::
+:::{.fragment}
+    - System dynamics are rarely known (so standard control theoretic approaches can't be applied)
+:::
+:::{.fragment}
+    - Data demonstrating the optimal policy is rarely available (so we can't imitate the optimal policy with supervised learning)
+:::
+:::{.fragment}
+    - It is much easier to evaluate a solution that generate one (i.e. there exists a generator-verifier gap)
+:::
+
+:::{.fragment}
+- RL provides a generic framework for modelling sequential-decision making problems with these characteristics [1]
 :::
 
 ---
 
-## RL + Simulators + Compute = Superhuman
+## RL + _Perfect_ Simulators + Compute = Superhuman
 
 <div style="text-align: center;">
 ![](figures/silver-rl.png){width=100%}
@@ -56,7 +92,7 @@ David Silver, RL Conference 2024
 
 ---
 
-## RL + <span style="color: red;">~~Simulators~~</span> + Compute = Superhuman
+## RL + <span style="color: red;">~~_Perfect_ Simulators~~</span> + Compute = Superhuman
 
 <div style="text-align: center;">
 ![](figures/silver-rl.png){width=100%}
@@ -71,7 +107,7 @@ David Silver, RL Conference 2024
 ## RL + _Learned Simulators_ + Compute = Meh?
 
 :::{.fragment}
-- In the absence of a ground-truth simulator, we can _learn_ one from data
+- In the absence of a perfect simulator, we can _learn_ one from data
 :::
 
 :::{.fragment}
@@ -79,26 +115,34 @@ David Silver, RL Conference 2024
 :::
 
 :::{.fragment}
-- But these models will only ever be approximations of the real world
+- But these models will only ever _approximate_ the environment's dynamics
 :::
 
 :::{.fragment}
-- So, a gap between these learned simulators and the real world is **inevitable**. The system cannot see the real-world in advance.
+    - Finite data
+:::
+
+:::{.fragment}
+    - Function approximation
+:::
+
+:::{.fragment}
+- So, a discrepancy between the dynamics modelled by learned simulators and the dynamics of the problem environment is **inevitable**
 :::
 
 ---
 
-## Zero-Shot Reinforcement Learning {.scrollable}
-- Adapting quickly to the real-world is the primary concern of _zero-shot reinforcement learning_ methods
+## The Case for Zero-Shot RL
+- _Zero-shot RL_ methods aim to handle this discrepancy quickly
 
 :::{.fragment}
 - Impressive progress has been made if the gap between the learned simulator and the real-world is small
 :::
 
 :::{.fragment}
-- I contend that to solve real-world problems these methods need to deal with a larger gap and satisfy
+- I contend that to solve real-world problems these methods need to deal with a larger gap and satisfy:
 <div style="text-align: center;">
-![](figures/constraints.png){width=85%}
+![](figures/constraints.png){width=80%}
 </div>
 :::
 
@@ -112,81 +156,189 @@ David Silver, RL Conference 2024
 
 ---
 
-## Paper 1: Data Quality Constraint
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### Motivation
+:::{.fragment}
+- The standard zero-shot RL methods, forward-backward representations (FB) [2] and universal successor features (USF) [3], provide principled mechanisms for performing zero-shot task generalisation
+:::
+
+:::{.fragment}
+- However, they assume access to idealised (large & diverse) pre-training datasets that we can't expect for real problems
+:::
+
+:::{.fragment}
+- **Can we pre-train zero-shot RL methods on realistic (small & narrow) datasets?**
+:::
+
+::: aside
+**Scott Jeen**, Tom Bewley, and Jonathan M. Cullen. _Zero-shot Reinforcement Learning from Low Quality Data_. In Advances in Neural Information Processing Systems 38, 2024
+:::
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### Failure mode: out-of-distribution value overestimation [4]
+
+<div style="text-align: center;">
+![](figures/chapter3-overestimates.png){width=85%}
+</div>
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### Failure mode: out-of-distribution value overestimation [4]
+
+<div style="text-align: center;">
+![](figures/chapter3-overestimates.png){width=85%}
+</div>
+
+<div style="text-align: center;">
+![](figures/chapter3-fb-loss.png){width=100%}
+</div>
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### Failure mode: out-of-distribution value overestimation [4]
+
+<div style="text-align: center;">
+![](figures/chapter3-overestimates.png){width=85%}
+</div>
+
+<div style="text-align: center;">
+![](figures/chapter3-fb-loss-2.png){width=100%}
+</div>
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### _Conservative_ Zero-shot RL
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### _Conservative_ Zero-shot RL
+![](figures/chapter3-vcfb-intuition-0.png){width=90%}
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### _Conservative_ Zero-shot RL
+![](figures/chapter3-vcfb-intuition-1.png){width=90%}
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### _Conservative_ Zero-shot RL
+![](figures/chapter3-vcfb-intuition-2.png){width=90%}
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### _Conservative_ Zero-shot RL
+![](figures/chapter3-vcfb-intuition-3.png){width=100%}
+
+![](figures/chapter3-vcfb-equation.png){width=77%}
+![](figures/chapter3-mcfb-equation.png){width=100%}
+
+::: aside
+C.f. [5]
+:::
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### ExORL Results
+
+::: {.columns}
+:::: {.column width="50%"}
+
+#### Baselines
+- **Zero-shot RL:** FB [2], SF-LAP [6]
+- **Goal-conditioned RL:** GC-IQL [7]
+- **Offline RL:** CQL [5]
+
+::::
+
+:::: {.column width="50%"}
+#### Datasets
+
+![](figures/chapter3-dataset-heatmap.png){width=100%}
+::::
+:::
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### ExORL Results
+
+<div style="padding-top: 50px;">
+![](figures/chapter3-exorl.png){width=100%}
+</div>
+
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### D4RL Results
+
 <div style="padding-top: 50px;">
 <div style="text-align: center;">
-![](figures/vcfb-intuition-3.png){width=100%}
+![](figures/chapter3-d4rl.png){width=52%}
 </div>
 </div>
 
-::: aside
-Scott Jeen, Tom Bewley, and Jonathan M. Cullen. _Zero-shot Reinforcement Learning from Low Quality Data_. In Advances in Neural Information Processing Systems 38, 2024
+---
+
+## Chapter 3: Zero-shot RL from Low Quality Data
+
+### Performance on Idealised Datasets is Unaffected
+
+::: {.columns}
+::: {.column width="50%"}
+![](figures/chapter3-dataset-size.png)
+:::
+::: {.column width="50%"}
+![](figures/chapter3-full-datasets.png)
+:::
 :::
 
 ---
 
-## Paper 1: Data Quality Constraint
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-![](figures/performance-profiles-subplot.png){width=80%}
-</div>
-</div>
+## Chapter 3: Zero-shot RL from Low Quality Data
 
-::: aside
-Scott Jeen, Tom Bewley, and Jonathan M. Cullen. _Zero-shot Reinforcement Learning from Low Quality Data_. In Advances in Neural Information Processing Systems 38, 2024
+### Conclusions
+
+::: {.fragment}
+- Like standard offline RL methods, zero-shot RL methods suffer from the _distribution shift_
+:::
+
+::: {.fragment}
+- As a resolution, we introduce _Conservative_ zero-shot RL methods
+:::
+
+::: {.fragment}
+- _Conservative_ zero-shot RL methods considerably outperform standard zero-shot RL methods on low-quality datasets
+:::
+
+::: {.fragment}
+- _Conservative_ zero-shot RL methods do not compromise performance on idealised datasets
 :::
 
 ---
 
-## Paper 2a: Dynamics Constraint
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-![](figures/confb-architecture-final.png){width=80%}
-</div>
-</div>
-
-::: aside
-Scott Jeen and Jonathan M. Cullen. _Foundation Policies with Memory_. Under review at ICLR 2025
-:::
-
----
-
-## Paper 2a: Dynamics Constraint
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-![](figures/aggregate-train-test.png){width=70%}
-</div>
-</div>
-
-::: aside
-Scott Jeen and Jonathan M. Cullen. _Foundation Policies with Memory_. Under review at ICLR 2025
-:::
-
----
-
-## Paper 2b: Dynamics Constraint
-<div style="padding-top: 20px;">
-<div style="text-align: center;">
-![](figures/darc-intuition.png){width=50%}
-</div>
-</div>
-
-::: aside
-Scott Jeen and Jonathan M. Cullen. _Dynamics Generalisation with Behaviour Foundation Models_. RLC 2024
-:::
-
----
-
-## Paper 2b: Dynamics Constraint
-<div style="padding-top: 100px;">
-<div style="text-align: center;">
-![](figures/results.png){width=80%}
-</div>
-</div>
-
-::: aside
-Scott Jeen and Jonathan M. Cullen. _Dynamics Generalisation with Behaviour Foundation Models_. RLC 2024
-:::
+## Chapter 4: Zero-shot RL under Partial Observability
 
 ---
 
@@ -216,84 +368,32 @@ Scott Jeen, Alessandro Abate & Jonathan M. Cullen. _Low Emission Building Contro
 
 ---
 
-## Reflections
-
-::: {.fragment}
-### Things I did well
-- I hit the rock every day (stonecutter's creedo)
-:::
-
-::: {.fragment}
-- I got formal feedback (peer review) as often as I could
-:::
-
-::: {.fragment}
-- I focussed on problems, not solutions (latterly)
-:::
-
-::: {.fragment}
-- I didn't follow the zeitgeist
-:::
-
----
-
-## Reflections
-
-::: {.fragment}
-### Things I didn't do well
-- I should have spoken to (and collaborated with) more people, especially at conferences
-:::
-
-::: {.fragment}
-- I could've written up my work more frequently
-:::
-
-::: {.fragment}
-- I could've followed the zeitgeist more
-:::
-
-::: {.fragment}
-- I didn't spot the building control work was a dead-end quickly enough (I was too focussed on solutions not problems)
-:::
-
-::: {.fragment}
-- I wasted time in the first 18 months
-:::
-
----
-
-## Things I'll take away (and you might too)
-
-::: {.fragment}
-- Your idea can always be more general
-:::
-
-::: {.fragment}
-- Your feedback loop can always be tighter (i.e you can always interact with the real-world more regularly)
-:::
-
-::: {.fragment}
-- You can always speak to more people
-:::
-
-::: {.fragment}
-- You can always write up your work (even if nobody reads it!)
-:::
-
-::: {.fragment}
-- There's a lower bound on the number of attempts it takes to solve a hard problem
-:::
-
-::: {.fragment}
-- You can always work quicker (sorry)
-:::
-
-::: {.fragment}
-- You can untie any knot if you play with it long enough (and physics will let you untie it)
-:::
+## Outlook
 
 ---
 
 # Thanks!
+
+---
+
+## References
+
+::: references
+
+[1] Sutton, R. and Barto, A. (2018). Reinforcement Learning: An Introduction. The MIT Press, second edition.
+
+[2] Touati, A. and Ollivier, Y. (2021). Learning one representation to optimize all rewards. Advances in Neural Information Processing Systems, 34:13–23
+
+[3] Borsa, D., Barreto, A., Quan, J., Mankowitz, D., Munos, R., Van Hasselt, H., Silver, D., and Schaul, T. (2018). Universal successor features approximators. arXiv preprint arXiv:1812.07626.
+
+[4] Kumar, A., Fu, J., Soh, M., Tucker, G., and Levine, S. (2019). Stabilizing off-policy q-learning via bootstrapping error reduction. In Advances in Neural Information Processing Systems, volume 32
+
+[5] Kumar, A., Zhou, A., Tucker, G., and Levine, S. (2020). Conservative q-learning for offline reinforcement learning. arXiv preprint arXiv:2006.04779.
+
+[6] Touati, A., Rapin, J., and Ollivier, Y. (2023). Does zero-shot reinforce- ment learning exist? In The Eleventh International Conference on Learning Representations.
+
+[7] Park, S., Ghosh, D., Eysenbach, B., and Levine, S. (2023). Hiql: Offline goal- conditioned rl with latent states as actions. Advances in Neural Information Processing Systems, 37.
+
+:::
 
 ---

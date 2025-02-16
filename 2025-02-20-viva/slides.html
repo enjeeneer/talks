@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Scott Jeen">
-  <title>4 Years in 4 (ish) Minutes</title>
+  <title>On Zero-Shot Reinforcement Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -326,8 +326,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">4 Years in 4 (ish) Minutes</h1>
-  <p class="subtitle">Reflections on a PhD</p>
+  <h1 class="title">On Zero-Shot Reinforcement Learning</h1>
+  <p class="subtitle">PhD Viva</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -341,50 +341,91 @@ Scott Jeen
 </div>
 
 </section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<div class="fragment">
 <ol type="1">
-<li>Zero-Shot Reinforcement Learning: Why?</li>
-<li>With No Prior Data</li>
-<li>From Low Quality Data</li>
-<li>Under Changed Dynamics</li>
-<li>Outlook</li>
-<li>Reflections</li>
+<li>The Case for Zero-Shot RL</li>
 </ol>
+</div>
+<div class="fragment">
+<ol start="2" type="1">
+<li><strong>Chapter 3:</strong> From Low Quality Data</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="3" type="1">
+<li><strong>Chapter 4:</strong> Under Changed Dynamics</li>
+</ol>
+</div>
 </section>
-<section id="reinforcement-learning-why" class="slide level2">
-<h2>Reinforcement Learning: Why?</h2>
+<section id="outline-1" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li><p>The Case for Zero-Shot RL</p></li>
+<li><p><strong>Chapter 3:</strong> From Low Quality Data</p></li>
+<li><p><span style="color: red;"><del><strong>Chapter 4:</strong> Under Changed Dynamics</del></span></p></li>
+</ol>
+<div class="fragment">
+<ol start="3" type="1">
+<li><strong>Chapter 4:</strong> Under <span style="color: green;"><em>Partial Observability</em></span></li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="4" type="1">
+<li><strong>Chapter 5:</strong> With No Prior Data</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="5" type="1">
+<li>Outlook</li>
+</ol>
+</div>
+</section>
+<section id="the-case-for-rl" class="slide level2">
+<h2>The Case for RL</h2>
 <div class="fragment">
 <ul>
-<li>Society faces many problems, many of which can be cast as sequential decision-making problems</li>
+<li>Society faces problems, many of which can be cast as sequential decision-making problems:</li>
 </ul>
 </div>
 <div class="fragment">
-<pre><code>- Micro: drug discovery</code></pre>
+<pre><code>- Engineering: energy generation control (fusion, fission, wind)</code></pre>
 </div>
 <div class="fragment">
-<pre><code>- Micro: energy generation control (fusion, fission, wind)</code></pre>
+<pre><code>- Education: teacher-student interaction</code></pre>
 </div>
 <div class="fragment">
-<pre><code>- Micro: teacher interacting sequentially with a student</code></pre>
+<pre><code>- Mathematics: theorem-proving</code></pre>
 </div>
 <div class="fragment">
-<pre><code>- Macro: climate policy</code></pre>
+<pre><code>- Policy: climate negotiations</code></pre>
 </div>
 <div class="fragment">
-<pre><code>- Macro: legislative innovation</code></pre>
-</div>
-<div class="fragment">
-<pre><code>- Macro: science</code></pre>
+<pre><code>- Science: forming hypotheses -&gt; making predictions -&gt; testing them</code></pre>
 </div>
 <div class="fragment">
 <ul>
-<li>Reinforcement learning is the (as yet) most effective computational approach to solving sequential decision-making problems</li>
+<li>In such cases:</li>
+</ul>
+</div>
+<div class="fragment">
+<pre><code>- System dynamics are rarely known (so standard control theoretic approaches can't be applied)</code></pre>
+</div>
+<div class="fragment">
+<pre><code>- Data demonstrating the optimal policy is rarely available (so we can't imitate the optimal policy with supervised learning)</code></pre>
+</div>
+<div class="fragment">
+<pre><code>- It is much easier to evaluate a solution that generate one (i.e. there exists a generator-verifier gap)</code></pre>
+</div>
+<div class="fragment">
+<ul>
+<li>RL provides a generic framework for modelling sequential-decision making problems with these characteristics [1]</li>
 </ul>
 </div>
 </section>
-<section id="rl-simulators-compute-superhuman" class="slide level2">
-<h2>RL + Simulators + Compute = Superhuman</h2>
+<section id="rl-perfect-simulators-compute-superhuman" class="slide level2">
+<h2>RL + <em>Perfect</em> Simulators + Compute = Superhuman</h2>
 <div style="text-align: center;">
 <p><img data-src="figures/silver-rl.png" style="width:100.0%"></p>
 </div>
@@ -392,8 +433,8 @@ Scott Jeen
 <aside><div>
 <p>David Silver, RL Conference 2024</p>
 </div></aside></section>
-<section id="rl-simulators-compute-superhuman-1" class="slide level2">
-<h2>RL + <span style="color: red;"><del>Simulators</del></span> + Compute = Superhuman</h2>
+<section id="rl-perfect-simulators-compute-superhuman-1" class="slide level2">
+<h2>RL + <span style="color: red;"><del><em>Perfect</em> Simulators</del></span> + Compute = Superhuman</h2>
 <div style="text-align: center;">
 <p><img data-src="figures/silver-rl.png" style="width:100.0%"></p>
 </div>
@@ -405,7 +446,7 @@ Scott Jeen
 <h2>RL + <em>Learned Simulators</em> + Compute = Meh?</h2>
 <div class="fragment">
 <ul>
-<li>In the absence of a ground-truth simulator, we can <em>learn</em> one from data</li>
+<li>In the absence of a perfect simulator, we can <em>learn</em> one from data</li>
 </ul>
 </div>
 <div class="fragment">
@@ -415,19 +456,25 @@ Scott Jeen
 </div>
 <div class="fragment">
 <ul>
-<li>But these models will only ever be approximations of the real world</li>
+<li>But these models will only ever <em>approximate</em> the environment’s dynamics</li>
 </ul>
 </div>
 <div class="fragment">
+<pre><code>- Finite data</code></pre>
+</div>
+<div class="fragment">
+<pre><code>- Function approximation</code></pre>
+</div>
+<div class="fragment">
 <ul>
-<li>So, a gap between these learned simulators and the real world is <strong>inevitable</strong>. The system cannot see the real-world in advance.</li>
+<li>So, a discrepancy between the dynamics modelled by learned simulators and the dynamics of the problem environment is <strong>inevitable</strong></li>
 </ul>
 </div>
 </section>
-<section id="zero-shot-reinforcement-learning" class="slide level2 scrollable">
-<h2>Zero-Shot Reinforcement Learning</h2>
+<section id="the-case-for-zero-shot-rl" class="slide level2">
+<h2>The Case for Zero-Shot RL</h2>
 <ul>
-<li>Adapting quickly to the real-world is the primary concern of <em>zero-shot reinforcement learning</em> methods</li>
+<li><em>Zero-shot RL</em> methods aim to handle this discrepancy quickly</li>
 </ul>
 <div class="fragment">
 <ul>
@@ -436,9 +483,9 @@ Scott Jeen
 </div>
 <div class="fragment">
 <ul>
-<li>I contend that to solve real-world problems these methods need to deal with a larger gap and satisfy
+<li>I contend that to solve real-world problems these methods need to deal with a larger gap and satisfy:
 <div style="text-align: center;">
-<p><img data-src="figures/constraints.png" style="width:85.0%"></p>
+<p><img data-src="figures/constraints.png" style="width:80.0%"></p>
 </div></li>
 </ul>
 </div>
@@ -451,72 +498,154 @@ Scott Jeen
 </div>
 </div>
 </section>
-<section id="paper-1-data-quality-constraint" class="slide level2">
-<h2>Paper 1: Data Quality Constraint</h2>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="motivation">Motivation</h3>
+<div class="fragment">
+<ul>
+<li>The standard zero-shot RL methods, forward-backward representations (FB) [2] and universal successor features (USF) [3], provide principled mechanisms for performing zero-shot task generalisation</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>However, they assume access to idealised (large &amp; diverse) pre-training datasets that we can’t expect for real problems</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Can we pre-train zero-shot RL methods on realistic (small &amp; narrow) datasets?</strong></li>
+</ul>
+</div>
+
+<aside><div>
+<p><strong>Scott Jeen</strong>, Tom Bewley, and Jonathan M. Cullen. <em>Zero-shot Reinforcement Learning from Low Quality Data</em>. In Advances in Neural Information Processing Systems 38, 2024</p>
+</div></aside></section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-1" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="failure-mode-out-of-distribution-value-overestimation-4">Failure mode: out-of-distribution value overestimation [4]</h3>
+<div style="text-align: center;">
+<p><img data-src="figures/chapter3-overestimates.png" style="width:85.0%"></p>
+</div>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-2" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="failure-mode-out-of-distribution-value-overestimation-4-1">Failure mode: out-of-distribution value overestimation [4]</h3>
+<div style="text-align: center;">
+<p><img data-src="figures/chapter3-overestimates.png" style="width:85.0%"></p>
+</div>
+<div style="text-align: center;">
+<p><img data-src="figures/chapter3-fb-loss.png" style="width:100.0%"></p>
+</div>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-3" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="failure-mode-out-of-distribution-value-overestimation-4-2">Failure mode: out-of-distribution value overestimation [4]</h3>
+<div style="text-align: center;">
+<p><img data-src="figures/chapter3-overestimates.png" style="width:85.0%"></p>
+</div>
+<div style="text-align: center;">
+<p><img data-src="figures/chapter3-fb-loss-2.png" style="width:100.0%"></p>
+</div>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-4" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conservative-zero-shot-rl"><em>Conservative</em> Zero-shot RL</h3>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-5" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conservative-zero-shot-rl-1"><em>Conservative</em> Zero-shot RL</h3>
+
+<img data-src="figures/chapter3-vcfb-intuition-0.png" style="width:90.0%" class="r-stretch"></section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-6" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conservative-zero-shot-rl-2"><em>Conservative</em> Zero-shot RL</h3>
+
+<img data-src="figures/chapter3-vcfb-intuition-1.png" style="width:90.0%" class="r-stretch"></section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-7" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conservative-zero-shot-rl-3"><em>Conservative</em> Zero-shot RL</h3>
+
+<img data-src="figures/chapter3-vcfb-intuition-2.png" style="width:90.0%" class="r-stretch"></section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-8" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conservative-zero-shot-rl-4"><em>Conservative</em> Zero-shot RL</h3>
+<p><img data-src="figures/chapter3-vcfb-intuition-3.png" style="width:100.0%"></p>
+<p><img data-src="figures/chapter3-vcfb-equation.png" style="width:77.0%"> <img data-src="figures/chapter3-mcfb-equation.png" style="width:100.0%"></p>
+
+<aside><div>
+<p>C.f. [5]</p>
+</div></aside></section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-9" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="exorl-results">ExORL Results</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="baselines">Baselines</h4>
+<ul>
+<li><strong>Zero-shot RL:</strong> FB [2], SF-LAP [6]</li>
+<li><strong>Goal-conditioned RL:</strong> GC-IQL [7]</li>
+<li><strong>Offline RL:</strong> CQL [5]</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="datasets">Datasets</h4>
+<p><img data-src="figures/chapter3-dataset-heatmap.png" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-10" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="exorl-results-1">ExORL Results</h3>
+<div style="padding-top: 50px;">
+<p><img data-src="figures/chapter3-exorl.png" style="width:100.0%"></p>
+</div>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-11" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="d4rl-results">D4RL Results</h3>
 <div style="padding-top: 50px;">
 <div style="text-align: center;">
-<p><img data-src="figures/vcfb-intuition-3.png" style="width:100.0%"></p>
+<p><img data-src="figures/chapter3-d4rl.png" style="width:52.0%"></p>
 </div>
 </div>
-
-<aside><div>
-<p>Scott Jeen, Tom Bewley, and Jonathan M. Cullen. <em>Zero-shot Reinforcement Learning from Low Quality Data</em>. In Advances in Neural Information Processing Systems 38, 2024</p>
-</div></aside></section>
-<section id="paper-1-data-quality-constraint-1" class="slide level2">
-<h2>Paper 1: Data Quality Constraint</h2>
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-<p><img data-src="figures/performance-profiles-subplot.png" style="width:80.0%"></p>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-12" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="performance-on-idealised-datasets-is-unaffected">Performance on Idealised Datasets is Unaffected</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figures/chapter3-dataset-size.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figures/chapter3-full-datasets.png"></p>
 </div>
 </div>
-
-<aside><div>
-<p>Scott Jeen, Tom Bewley, and Jonathan M. Cullen. <em>Zero-shot Reinforcement Learning from Low Quality Data</em>. In Advances in Neural Information Processing Systems 38, 2024</p>
-</div></aside></section>
-<section id="paper-2a-dynamics-constraint" class="slide level2">
-<h2>Paper 2a: Dynamics Constraint</h2>
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-<p><img data-src="figures/confb-architecture-final.png" style="width:80.0%"></p>
+</section>
+<section id="chapter-3-zero-shot-rl-from-low-quality-data-13" class="slide level2">
+<h2>Chapter 3: Zero-shot RL from Low Quality Data</h2>
+<h3 id="conclusions">Conclusions</h3>
+<div class="fragment">
+<ul>
+<li>Like standard offline RL methods, zero-shot RL methods suffer from the <em>distribution shift</em></li>
+</ul>
 </div>
+<div class="fragment">
+<ul>
+<li>As a resolution, we introduce <em>Conservative</em> zero-shot RL methods</li>
+</ul>
 </div>
-
-<aside><div>
-<p>Scott Jeen and Jonathan M. Cullen. <em>Foundation Policies with Memory</em>. Under review at ICLR 2025</p>
-</div></aside></section>
-<section id="paper-2a-dynamics-constraint-1" class="slide level2">
-<h2>Paper 2a: Dynamics Constraint</h2>
-<div style="padding-top: 50px;">
-<div style="text-align: center;">
-<p><img data-src="figures/aggregate-train-test.png" style="width:70.0%"></p>
+<div class="fragment">
+<ul>
+<li><em>Conservative</em> zero-shot RL methods considerably outperform standard zero-shot RL methods on low-quality datasets</li>
+</ul>
 </div>
+<div class="fragment">
+<ul>
+<li><em>Conservative</em> zero-shot RL methods do not compromise performance on idealised datasets</li>
+</ul>
 </div>
-
-<aside><div>
-<p>Scott Jeen and Jonathan M. Cullen. <em>Foundation Policies with Memory</em>. Under review at ICLR 2025</p>
-</div></aside></section>
-<section id="paper-2b-dynamics-constraint" class="slide level2">
-<h2>Paper 2b: Dynamics Constraint</h2>
-<div style="padding-top: 20px;">
-<div style="text-align: center;">
-<p><img data-src="figures/darc-intuition.png" style="width:50.0%"></p>
-</div>
-</div>
-
-<aside><div>
-<p>Scott Jeen and Jonathan M. Cullen. <em>Dynamics Generalisation with Behaviour Foundation Models</em>. RLC 2024</p>
-</div></aside></section>
-<section id="paper-2b-dynamics-constraint-1" class="slide level2">
-<h2>Paper 2b: Dynamics Constraint</h2>
-<div style="padding-top: 100px;">
-<div style="text-align: center;">
-<p><img data-src="figures/results.png" style="width:80.0%"></p>
-</div>
-</div>
-
-<aside><div>
-<p>Scott Jeen and Jonathan M. Cullen. <em>Dynamics Generalisation with Behaviour Foundation Models</em>. RLC 2024</p>
-</div></aside></section>
+</section>
+<section id="chapter-4-zero-shot-rl-under-partial-observability" class="slide level2">
+<h2>Chapter 4: Zero-shot RL under Partial Observability</h2>
+</section>
 <section id="paper-3-with-no-prior-data-for-building-control" class="slide level2">
 <h2>Paper 3: With No Prior Data (for building control)</h2>
 <div style="padding-top: 100px;">
@@ -539,98 +668,8 @@ Scott Jeen
 <aside><div>
 <p>Scott Jeen, Alessandro Abate &amp; Jonathan M. Cullen. <em>Low Emission Building Control with Zero-Shot Reinforcement Learning</em>. AAAI 2023</p>
 </div></aside></section>
-<section id="reflections" class="slide level2">
-<h2>Reflections</h2>
-<div class="fragment">
-<!-- -->
-<h3 id="things-i-did-well">Things I did well</h3>
-<ul>
-<li>I hit the rock every day (stonecutter’s creedo)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I got formal feedback (peer review) as often as I could</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I focussed on problems, not solutions (latterly)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I didn’t follow the zeitgeist</li>
-</ul>
-</div>
-</section>
-<section id="reflections-1" class="slide level2">
-<h2>Reflections</h2>
-<div class="fragment">
-<!-- -->
-<h3 id="things-i-didnt-do-well">Things I didn’t do well</h3>
-<ul>
-<li>I should have spoken to (and collaborated with) more people, especially at conferences</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I could’ve written up my work more frequently</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I could’ve followed the zeitgeist more</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I didn’t spot the building control work was a dead-end quickly enough (I was too focussed on solutions not problems)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>I wasted time in the first 18 months</li>
-</ul>
-</div>
-</section>
-<section id="things-ill-take-away-and-you-might-too" class="slide level2">
-<h2>Things I’ll take away (and you might too)</h2>
-<div class="fragment">
-<ul>
-<li>Your idea can always be more general</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Your feedback loop can always be tighter (i.e you can always interact with the real-world more regularly)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>You can always speak to more people</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>You can always write up your work (even if nobody reads it!)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>There’s a lower bound on the number of attempts it takes to solve a hard problem</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>You can always work quicker (sorry)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>You can untie any knot if you play with it long enough (and physics will let you untie it)</li>
-</ul>
-</div>
+<section id="outlook" class="slide level2">
+<h2>Outlook</h2>
 </section>
 <section class="slide level2">
 
@@ -639,6 +678,18 @@ Scott Jeen
 <section id="thanks" class="title-slide slide level1 center">
 <h1>Thanks!</h1>
 
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<div class="references">
+<p>[1] Sutton, R. and Barto, A. (2018). Reinforcement Learning: An Introduction. The MIT Press, second edition.</p>
+<p>[2] Touati, A. and Ollivier, Y. (2021). Learning one representation to optimize all rewards. Advances in Neural Information Processing Systems, 34:13–23</p>
+<p>[3] Borsa, D., Barreto, A., Quan, J., Mankowitz, D., Munos, R., Van Hasselt, H., Silver, D., and Schaul, T. (2018). Universal successor features approximators. arXiv preprint arXiv:1812.07626.</p>
+<p>[4] Kumar, A., Fu, J., Soh, M., Tucker, G., and Levine, S. (2019). Stabilizing off-policy q-learning via bootstrapping error reduction. In Advances in Neural Information Processing Systems, volume 32</p>
+<p>[5] Kumar, A., Zhou, A., Tucker, G., and Levine, S. (2020). Conservative q-learning for offline reinforcement learning. arXiv preprint arXiv:2006.04779.</p>
+<p>[6] Touati, A., Rapin, J., and Ollivier, Y. (2023). Does zero-shot reinforce- ment learning exist? In The Eleventh International Conference on Learning Representations.</p>
+<p>[7] Park, S., Ghosh, D., Eysenbach, B., and Levine, S. (2023). Hiql: Offline goal- conditioned rl with latent states as actions. Advances in Neural Information Processing Systems, 37.</p>
+</div>
 </section>
 <section class="slide level2">
 
