@@ -4,6 +4,7 @@ author: "Scott Jeen"
 subtitle: PhD Viva
 institute: University of Cambridge
 format: rick-revealjs
+footer: "[https://enjeeneer.io](https://enjeeneer.io)"
 ---
 
 ## Outline
@@ -115,7 +116,7 @@ David Silver, RL Conference 2024
 :::
 
 :::{.fragment}
-- But these models will only ever _approximate_ the environment's dynamics
+- But these models will only ever _approximate_ the environment's true dynamics
 :::
 
 :::{.fragment}
@@ -421,7 +422,7 @@ C.f. [5]
 
 <div style="padding-top: 30px;">
 <div style="text-align: center;">
-![](figures/chapter4-aggregate.png){width=70%}
+![](figures/chapter4-aggregate-noisey-environment.png){width=70%}
 </div>
 </div>
 
@@ -432,9 +433,26 @@ C.f. [5]
 
 <div style="padding-top: 30px;">
 <div style="text-align: center;">
-![](figures/chapter4-generalisation.png){width=75%}
+![](figures/chapter4-aggregate-generalisation.png){width=70%}
 </div>
 </div>
+
+---
+
+## Chapter 4: Zero-shot RL under Partial Observability
+### Summary of proposed updates
+
+::: {.fragment}
+- _Both_ the forward and backward models are recurrent to handle state and task mis-identification
+:::
+
+::: {.fragment}
+- Focus on dynamics generalisation (with Markov states) as a special case of partial observability
+:::
+
+::: {.fragment}
+- Remove environment generalisation results
+:::
 
 ---
 
